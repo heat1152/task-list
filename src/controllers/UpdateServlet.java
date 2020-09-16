@@ -36,13 +36,13 @@ public class UpdateServlet extends HttpServlet {
             t.setContent(content);
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            t.setUpdate_at(currentTime);
+            t.setUpdated_at(currentTime);
          // バリデーションを実行してエラーがあったら編集画面のフォームに戻る
             List<String>errors = Validator.validate(t);
             if(errors.size() > 0){
                 em.close();
              // フォームに初期値を設定、さらにエラーメッセージを送る
-                request.setAttribute(_token, request.getSession().getId());
+                request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("task", t);
                 request.setAttribute("errors", errors);
 

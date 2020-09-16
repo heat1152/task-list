@@ -12,11 +12,11 @@
                     </tr>
 
                     <tr>
-                        <td>作成日時：<fmt:formatDate value="${task.create_at}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td>作成日時：<fmt:formatDate value="${task.created_at}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                     </tr>
 
                     <tr>
-                        <td>更新日時：<fmt:formatDate value="${task.update_at}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td>更新日時：<fmt:formatDate value="${task.updated_at}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                     </tr>
                 </table>
                 <div id="indexEdit">
