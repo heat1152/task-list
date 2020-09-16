@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Validator {
-
+ // バリデーションを実行する
     public static List<String> validate(Task t){
         List<String> errors = new ArrayList<String>();
 
@@ -15,7 +15,7 @@ public class Validator {
         }
         return errors;
     }
-
+    //必須入力チェック
     private static String _validateContent(String content){
         if(content == null||content.equals("")){
             return "入力内容がありません";

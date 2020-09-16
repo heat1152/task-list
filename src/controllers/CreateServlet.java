@@ -38,10 +38,11 @@ public class CreateServlet extends HttpServlet {
             t.setCreate_at(currentTime);
             t.setUpdate_at(currentTime);
 
+         // バリデーションを実行してエラーがあったら新規登録のフォームに戻る
             List<String>errors = Validator.validate(t);
             if(errors.size() > 0){
                 em.close();
-
+             // フォームに初期値を設定、さらにエラーメッセージを送る
                 request.setAttribute(_token, request.getSession().getId());
                 request.setAttribute("task", t);
                 request.setAttribute("errors", errors);
@@ -49,12 +50,13 @@ public class CreateServlet extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/new.jsp");
                 rd.forward(request, response);
             }else{
-
+             // データベースに保存
             em.getTransaction().begin();
             em.persist(t);
             em.getTransaction().commit();
+            request.getSession().setAttribute("flush", "登録が完了しました。");
             em.close();
-
+         // indexのページにリダイレクト
             response.sendRedirect(request.getContextPath()+"/index");
             }
         }

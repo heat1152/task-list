@@ -34,7 +34,7 @@ public class IndexServlet extends HttpServlet {
                 .setFirstResult(5 * (page - 1))
                 .setMaxResults(5)
                 .getResultList();
-
+     // 全件数を取得
         long tasks_count = (long)em.createNamedQuery("getTaskCount",Long.class)
                 .getSingleResult();
 
@@ -43,6 +43,13 @@ public class IndexServlet extends HttpServlet {
         request.setAttribute("tasks", tasks);
         request.setAttribute("tasks_count", tasks_count);
         request.setAttribute("page", page);
+
+     // フラッシュメッセージがセッションスコープにセットされていたら
+        // リクエストスコープに保存する（セッションスコープからは削除）
+        if(request.getSession().getAttribute("flush") != null) {
+            request.setAttribute("flush", request.getSession().getAttribute("flush"));
+            request.getSession().removeAttribute("flush");
+        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/index.jsp");
         rd.forward(request, response);
